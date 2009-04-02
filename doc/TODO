@@ -1,0 +1,43 @@
+======= Bugs ========
+
+
+======= Features ========
+
+* DLRs
+** DLR processing
+** DLR Delivery
+
+* Message status enquiry support (SMSC/ESME/HTTP/...)
+
+* Optimisation
+** Profile system
+** Check code coverage?
+
+* Queueing
+** Pluggable queue system
+** Priority queue
+** Rate limiting
+** Round robin
+
+* Connection Management
+** Reconnects, reconnect policy
+
+* Separate queues from connections
+** Connections are directional, separate forward, reverse paths.
+
+======= Done ========
+
+ESME 
+
+* MOs
+** MO Rule processing
+** MO Delivery
+
+* Separate queues from connections
+** Connections should be transport only. Provide a blocking {deliver, Msg} call.
+
+* Bug
+When erms_smsc binds a second receiver for a connection
+(e.g. "018-SMSC"), it takes over the erms_connection_mgr registration
+- when that connection dies, it doesn't revert to the first
+connection.

@@ -1,0 +1,63 @@
+<erl>
+
+-record(connection, {name,
+                     mod,
+                     args,
+                     supervised,
+                     rules}).
+
+out(A) ->
+    {ehtml,
+     [{ssi, {rel_path, "ssi/page.ssi"}, "%%",
+       [{"TITLE", "ERMS - Connections"},
+        {"SiteTitle", "ERMS - Connections"},
+        {"SiteSubTitle", "SMS Routing System"},
+        {"MainMenu", {ehtml, [{ssi, {rel_path, "ssi/erms_topnav.ssi"}, "%%", []}]}},
+        {"RightCol", {ehtml, [{ssi, {rel_path, "ssi/default_rightcol.ssi"}, "%%", []}]}},
+        {"LeftNav", {ehtml, [{ssi, {rel_path, "ssi/default_leftnav.ssi"}, "%%", []}]}},
+        {"Content", mainpage_summary()}
+       ]}]}.
+
+mainpage_summary() ->
+    {ehtml,
+     [{h1, [], ["Connections"]},
+      connections()
+     ]}.
+
+live_connections() ->
+    table(["Name", "Process ID", "Started at"],
+          [[Name, t2l(Pid), iso_8601_fmt(calendar:now_to_local_time(Time))]
+           || {{connection, Name},Pid,Time} 
+                  <- ets:tab2list(proc_reg)]).
+
+connections() ->
+    table(["Name", "Module", "Supervised", "Process ID"],
+          [[Name, atom_to_list(Mod), t2l(Sup), pidof(Name)]
+           || #connection{name=Name,mod=Mod,supervised=Sup}
+                 <- erms:connections()]).
+
+t2l(T) ->
+    io_lib:format("~p", [T]).
+
+table(Headers, Body) ->
+    {table, [{width, "90%"}],
+     [{thead, [],
+       [{th, [], H} || H <- Headers]},
+      {tbody, [],
+       [{tr, [],
+         [{td, [], C} || C <- Row]}
+        || Row <- Body]}]}.
+
+iso_8601_fmt(DateTime) ->
+    {{Year,Month,Day},{Hour,Min,Sec}} = DateTime,
+    io_lib:format("~4.10.0B-~2.10.0B-~2.10.0B_~2.10.0B:~2.10.0B:~2.10.0B",
+                  [Year, Month, Day, Hour, Min, Sec]).
+
+pidof(Name) ->
+    case erms_connection_mgr:where({connection, Name}) of
+        Pid when is_pid(Pid) ->
+            t2l(Pid);
+        undefined -> "not running"
+    end.
+
+</erl>

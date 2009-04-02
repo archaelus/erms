@@ -1,0 +1,7 @@
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/connections.yaws">Connections</a></li>
+          <li><a href="/shortcodes.yaws">Shortcodes</a></li>
+          <li><a href="/stats.yaws">Statistics</a></li>
+          <li><a href="/doc">System Documentation</a></li>
+        </ul>

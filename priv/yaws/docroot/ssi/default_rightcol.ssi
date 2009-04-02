@@ -1,0 +1,21 @@
+<!--
+          <h1>Search</h1>
+          <p class="searchform">
+            <input type="text" alt="Search" class="searchbox" />
+            <input type="submit" value="Go!" class="searchbutton" />
+          </p>
+
+          <h1>Latest news</h1>
+          <p><strong>Dec 11: </strong>
+            andreas09 is built with valid XHTML 1.1 and CSS2. It is simple and easy to work with, and it comes in several different flavors. This is version 1.0 (Dec 11th 2005).</p>
+          <p><strong>Dec 10: </strong>
+            Place for news or important messages, maybe?</p>
+
+          <h1>Links:</h1>
+          <ul class="linklist">
+            <li><a href="http://andreasviklund.com">My website</a></li>
+            <li><a href="http://andreasviklund.com/templates">Free website templates</a></li>
+            <li><a href="http://openwebdesign.org">OpenWebDesign.org</a></li>
+            <li><a href="http://oswd.org">OSWD.org</a></li>
+          </ul>
+-->

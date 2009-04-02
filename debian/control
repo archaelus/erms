@@ -1,0 +1,12 @@
+Source: erms
+Section: unknown
+Priority: optional
+Maintainer: "Geoff Cant <geoff@catalyst.net.nz>"
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.6.1
+
+Package: erms
+Architecture: any
+Depends: erlang-base (>= 1:11.b.5-1) | erlang-base-hipe (>= 1:11.b.5-1), adduser (>= 3.11)
+Description: ERMS SMS Routing system
+ Erlang SMS routing/rewriting system.

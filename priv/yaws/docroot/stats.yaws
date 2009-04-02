@@ -1,0 +1,46 @@
+<erl>
+out(A) ->
+    {ehtml,
+     [{ssi, {rel_path, "ssi/page.ssi"}, "%%",
+       [{"TITLE", "ERMS - Statistics"},
+        {"SiteTitle", "ERMS - Statistics"},
+        {"SiteSubTitle", "SMS Routing System"},
+        {"MainMenu", {ehtml, [{ssi, {rel_path, "ssi/erms_topnav.ssi"}, "%%", []}]}},
+        {"RightCol", {ehtml, [{ssi, {rel_path, "ssi/default_rightcol.ssi"}, "%%", []}]}},
+        {"LeftNav", {ehtml, [{ssi, {rel_path, "ssi/default_leftnav.ssi"}, "%%", []}]}},
+        {"Content", mainpage_summary()}
+       ]}]}.
+
+mainpage_summary() ->
+    {Counters, Rates} = erms_stats:current_stats(),
+    {ehtml,
+     [{ul, [],
+       [{li, [], ["Counters: ",
+                  counter_table(Counters)]},
+        {li, [], ["Rates: ",
+                  rate_table(Rates)]}
+       ]}]}.
+
+counter_table(Counters) ->
+    table(["Measure", "Count"],
+          [[t2l(M),t2l(C)]
+           ||{M,C} <- Counters]).
+
+rate_table(Rates) ->
+    table(["Measure", "Min", "Max", "Sum", "Count", "Average"],
+          [lists:map(fun t2l/1, [M,Min,Max,Sum,Count,Average])
+           ||{M,{Min,Max,Sum,Count,Average}} <- Rates]).
+
+t2l(T) ->
+    io_lib:format("~p", [T]).
+
+table(Headers, Body) ->
+    {table, [],
+     [{thead, [],
+       [{th, [], H} || H <- Headers]},
+      {tbody, [],
+       [{tr, [],
+         [{td, [], C} || C <- Row]}
+        || Row <- Body]}]}.
+
+</erl>

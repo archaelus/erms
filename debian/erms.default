@@ -1,0 +1,19 @@
+# Defaults for erms initscript
+# sourced by /etc/init.d/erms
+# installed at /etc/default/erms by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# Additional options that are passed to the Daemon.
+ERMS_HOME=/usr/share/erms
+ERMS_USER=erms
+ERMS_OWNER=erms-adm
+ERMS_NAME="ERMS SMS routing system"
+ERMS_GROUP=erms
+ERMS_REL=0.9
+ERMS_NODE=erms
+# Kernel poll, SMP, 10 async io threads"
+ERMS_ERL_FLAGS="+K true -smp +A 10"
+ERMS_HOST=127.0.0.1

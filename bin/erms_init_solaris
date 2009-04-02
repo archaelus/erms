@@ -1,0 +1,24 @@
+#!/bin/sh
+
+SCRIPTNAME=erms_init
+LOGDIR=/appl/erms/log
+PIDFILE=$LOGDIR/$SCRIPTNAME.pid
+USERID=erms
+
+case $1 in
+  'start')
+   su erms -c "/appl/erms/bin/erms_ctl $1"
+  ;;
+  'stop')
+    su erms -c "/appl/erms/bin/erms_ctl $1"
+  ;;
+  'restart')
+    $0 stop
+    $0 start
+  ;;
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+  ;;
+esac
+exit 0

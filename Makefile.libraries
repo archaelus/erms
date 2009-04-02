@@ -1,0 +1,7 @@
+#EUNIT_ROOT=/Users/nem/projects/erlang/eunit
+EUNIT_ROOT=/home/vik/src/eunit
+JUNGERL_ROOT=/Users/nem/projects/erlang/jungerl
+#ERLANG_ROOT=/Library/DarwinPorts/lib/erlang
+ERLANG_ROOT=/usr/lib/erlang
+
+PROJECT_INCLUDE=-I lib/yaws*/include -I lib/oserl*/include -I lib/erlmail*/include -I ${ERLANG_ROOT}/lib/stdlib-*/include

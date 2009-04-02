@@ -1,0 +1,42 @@
+<erl>
+out(A) ->
+    {ehtml,
+     [{ssi, {rel_path, "ssi/page.ssi"}, "%%",
+       [{"TITLE", "ERMS"},
+        {"SiteTitle", "ERMS"},
+        {"SiteSubTitle", "SMS Routing System"},
+        {"MainMenu", {ehtml, [{ssi, {rel_path, "ssi/erms_topnav.ssi"}, "%%", []}]}},
+        {"RightCol", {ehtml, [{ssi, {rel_path, "ssi/default_rightcol.ssi"}, "%%", []}]}},
+        {"LeftNav", {ehtml, [{ssi, {rel_path, "ssi/default_leftnav.ssi"}, "%%", []}]}},
+        {"Content", mainpage_summary()}
+       ]}]}.
+
+mainpage_summary() ->
+    {ehtml,
+     [{ul, [],
+       [{li, [], ["Live connections: ",
+                  {ul, [],
+                   live_connections()}]},
+        {li, [], ["Shortcodes: ",
+                  {ul, [],
+                   shortcodes()}]}
+       ]}]}.
+
+live_connections() ->
+    [{li, [], io_lib:format("~s (~p) ~s",
+                            [Name, Pid, iso_8601_fmt(calendar:now_to_local_time(Time))])}
+     || {{connection, Name},Pid,Time} 
+            <- ets:tab2list(proc_reg)].
+
+shortcodes() ->
+    [{li, [], io_lib:format("~s (~p) ~s",
+                            [Name, Pid, iso_8601_fmt(calendar:now_to_local_time(Time))])}
+     || {{shortcode, Name},Pid,Time} 
+            <- ets:tab2list(proc_reg)].
+
+
+iso_8601_fmt(DateTime) ->
+    {{Year,Month,Day},{Hour,Min,Sec}} = DateTime,
+    io_lib:format("~4.10.0B-~2.10.0B-~2.10.0B_~2.10.0B:~2.10.0B:~2.10.0B",
+                  [Year, Month, Day, Hour, Min, Sec]).
+</erl>

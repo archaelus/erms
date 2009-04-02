@@ -1,0 +1,14 @@
+In which Geoff explains some of the reasoning behind various design decisions:
+
+erms_mnp_cache:load_ipms(Dict) - the erms mnp cache effectively
+serializes all mnp lookups. If it's only doing dict::dict() caching,
+this is OK because we'll get an answer in a roughly constant (and
+small) amount of time. If we made the mnp cache read the ipms report
+file and parse itself, there would be a pause during which all mnp
+lookups would block. While writing this it also occurs to me that I'm
+currently doing the erms_mnp:mnp_lookup/2 in the mnp cache - this
+really needs to happen in a child process because a lookup can block
+for up to 5 seconds - this is quite different from the old behaviour
+where all mnp_lookup/2 operations happened in parallel (in which case
+a lookup blocking for 5 seconds is fine because it only affects one
+message).

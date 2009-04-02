@@ -1,0 +1,4 @@
+Dir = "/Users/nem/projects/erlang/ndc/darcs-ndc",
+Path = [Dir ++ "/lib/*/ebin"].
+systools:make_script("ndc",[{path,Path}, {exref, [ndc]}]).
+systools:make_tar("ndc", [{path,Path}]).

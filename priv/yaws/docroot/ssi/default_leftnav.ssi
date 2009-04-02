@@ -1,0 +1,15 @@
+<!--
+          <h1>Included layouts</h1>
+          <p>
+            <a class="nav active" href="index.html">3 columns</a><span class="hide"> | </span>
+            <a class="nav" href="2col.html">2 columns</a><span class="hide"> | </span>
+            <a class="nav" href="no-img.html">No images</a><span class="hide"> | </span>
+            <a class="nav" href="#">Example menu</a><span class="hide"> | </span>
+            <a class="nav sub" href="#">Sub-page 1</a><span class="hide"> | </span>
+            <a class="nav sub" href="#">Active sub-page</a><span class="hide"> | </span>
+            <a class="nav sub" href="#">Sub-page 2</a>
+          </p>
+
+          <h1>Included colors</h1>
+          <img src="img/colors.jpg" height="104" width="125" class="thumbnail" alt="Included colors" />
+-->

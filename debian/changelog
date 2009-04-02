@@ -1,0 +1,99 @@
+erms (0.9-7ubuntu1) hardy; urgency=low
+
+  * Tidied - deb now built in Makefile
+
+ -- Vik Olliver (Vik @ Catalyst) <vik@catalyst.net.nz>  Tue, 09 Sep 2008 15:06:16 +1200
+
+erms (0.9-7) etch; urgency=low
+
+  * Fixes an erms_smsc:smpp_message_id/1 bug
+  * Fixes an erms_reports:repopulate_from_node/1 bug 
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Mon, 27 Aug 2007 14:10:23 +1200
+
+erms (0.9-6) etch; urgency=low
+
+  * Reporting fixes. 
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Fri, 24 Aug 2007 16:15:56 +1200
+
+erms (0.9-5) etch; urgency=low
+
+  * Reporting fixes
+  * More perf. counters. 
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Fri, 24 Aug 2007 15:21:59 +1200
+
+erms (0.9-4) etch; urgency=low
+
+  * Fixing ulimits in init.d script
+  * Fixing heartbeat command in init.d script.
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Fri, 24 Aug 2007 09:31:42 +1200
+
+erms (0.9-2) etch; urgency=low
+
+  * ERMS import from upstream.
+  * debug_log cosmetic fix
+  * Documentation and source now included.
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Tue, 14 Aug 2007 10:50:59 +1200
+
+erms (0.9-1) etch; urgency=low
+
+  * ERMS v0.9 from upstream
+  * SMPP improvements.
+  * Management interface improvements. 
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Thu,  9 Aug 2007 11:09:05 +1200
+
+erms (0.8-7) etch; urgency=low
+
+  * MNP lookup fix.
+  * New erms_db functionality.
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Mon,  6 Aug 2007 17:50:29 +1200
+
+erms (0.8-6) etch; urgency=low
+
+  * Improving release package
+  * Updated erms_db:init_node/1 
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Thu,  2 Aug 2007 14:14:07 +1200
+
+erms (0.8-5) etch; urgency=low
+
+  * Adding priv/db back. 
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Thu,  2 Aug 2007 13:20:59 +1200
+
+erms (0.8-4) etch; urgency=low
+
+  * Upgrade to oserl-1.3 
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Thu,  2 Aug 2007 12:54:15 +1200
+
+erms (0.8-3) etch; urgency=low
+
+  * Updated init.d file for etch.
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Wed,  1 Aug 2007 17:31:01 +1200
+
+erms (0.8-1) sarge; urgency=low
+
+  * Updating for v0.8
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Thu, 19 Jul 2007 15:19:02 +1200
+
+erms (0.4-2) unstable; urgency=low
+
+  * Moving priv/{db,log} to /var/lib/erms, adding erms_rb.
+
+ -- Geoff Cant <geoff@build-sarge-i386.wgtn.cat-it.co.nz>  Mon, 19 Feb 2007 10:21:48 +1300
+
+erms (0.4-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Geoff Cant <geoff@catalyst.net.nz>  Tue,  6 Feb 2007 19:51:37 +1300
+

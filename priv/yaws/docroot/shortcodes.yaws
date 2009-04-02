@@ -1,0 +1,59 @@
+<erl>
+
+-record(shortcode, {name,
+                    description,
+                    mt_rules,
+                    mo_rules}).
+
+out(A) ->
+    {ehtml,
+     [{ssi, {rel_path, "ssi/page.ssi"}, "%%",
+       [{"TITLE", "ERMS - Shortcodes"},
+        {"SiteTitle", "ERMS - Shortcode Services"},
+        {"SiteSubTitle", "SMS Routing System"},
+        {"MainMenu", {ehtml, [{ssi, {rel_path, "ssi/erms_topnav.ssi"}, "%%", []}]}},
+        {"RightCol", {ehtml, [{ssi, {rel_path, "ssi/default_rightcol.ssi"}, "%%", []}]}},
+        {"LeftNav", {ehtml, [{ssi, {rel_path, "ssi/default_leftnav.ssi"}, "%%", []}]}},
+        {"Content", mainpage_summary()}
+       ]}]}.
+
+mainpage_summary() ->
+    {ehtml,
+     [{h1, [], ["Configured Shortcodes"]},
+      configured_shortcodes()
+     ]}.
+
+configured_shortcodes() ->
+    {ul, [],
+     [{li, [],
+       [io_lib:format("~s - ~s", [Name, Desc]),
+        {ul, [],
+         [{li, [],
+           ["MT Rules",
+            {pre, [],
+             io_lib:format("~p", [MTRules])}]},
+          {li, [],
+           ["MO Rules",
+            {pre, [],
+             io_lib:format("~p", [MORules])}]}]}]}
+      || #shortcode{name=Name,description=Desc,
+                    mt_rules=MTRules,mo_rules=MORules}
+             <- erms:shortcodes()]}.
+
+t2l(T) ->
+    io_lib:format("~p", [T]).
+
+table(Headers, Body) ->
+    {table, [],
+     [{thead, [],
+       [{th, [], H} || H <- Headers]},
+      {tbody, [],
+       [{tr, [],
+         [{td, [], C} || C <- Row]}
+        || Row <- Body]}]}.
+
+iso_8601_fmt(DateTime) ->
+    {{Year,Month,Day},{Hour,Min,Sec}} = DateTime,
+    io_lib:format("~4.10.0B-~2.10.0B-~2.10.0B_~2.10.0B:~2.10.0B:~2.10.0B",
+                  [Year, Month, Day, Hour, Min, Sec]).
+</erl>

@@ -1,0 +1,9 @@
+Template: erms/cookie
+Type: password
+Default: FishstickB@c0nMinkey-fxjobhwI
+Description: The secret used to geneate the erms node cookie
+ This password will be run through 'openssl passwd -1' to
+ generate the shared secret used in this system of erms nodes.
+ .
+ If installing on multiple machines in a cluster it needs to
+ be the same.

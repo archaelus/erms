@@ -1,0 +1,8 @@
+        <ul>
+          <li><a class="current" href="index.html">Blue</a></li>
+          <li><a href="index.html">Green</a></li>
+          <li><a href="index.html">Orange</a></li>
+          <li><a href="index.html">Purple</a></li>
+          <li><a href="index.html">Red</a></li>
+          <li><a href="index.html">Black</a></li>
+        </ul>
