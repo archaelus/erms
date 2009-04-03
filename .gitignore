@@ -8,7 +8,6 @@ fprof.trace
 dist
 src/TAGS
 priv/log/*
-lib/*
 releases/*/*.boot
 releases/*/*.script
 releases/*/*.tar.gz

@@ -8,7 +8,7 @@
 %%%-------------------------------------------------------------------
 -module(erms_ipms).
 -include_lib("logging.hrl").
--include_lib("eunit.hrl").
+-include_lib("eunit/include/eunit.hrl").
 
 %% API
 -export([read_report_file/1,

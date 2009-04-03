@@ -7,10 +7,10 @@
 %% @end
 %%%-------------------------------------------------------------------
 -module(esvc_voucher_db).
--include_lib("eunit.hrl").
+-include_lib("eunit/include/eunit.hrl").
 -include_lib("logging.hrl").
 -include_lib("mnesia_model.hrl").
--include_lib("ms_transform.hrl").
+-include_lib("stdlib/include/ms_transform.hrl").
 -include_lib("esvc_voucher.hrl").
 
 % @todo

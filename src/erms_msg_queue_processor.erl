@@ -9,7 +9,7 @@
 -module(erms_msg_queue_processor).
 
 -include_lib("logging.hrl").
--include_lib("eunit.hrl").
+-include_lib("eunit/include/eunit.hrl").
 -include_lib("mnesia_model.hrl").
 
 -export([start_link/1, init/2,

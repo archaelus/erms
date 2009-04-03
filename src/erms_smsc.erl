@@ -31,7 +31,7 @@
 %%%-------------------------------------------------------------------
 %%% Include files
 %%%-------------------------------------------------------------------
--include_lib("eunit.hrl").
+-include_lib("eunit/include/eunit.hrl").
 -include_lib("oserl.hrl").
 -include_lib("smpp_base.hrl").
 -include_lib("logging.hrl").

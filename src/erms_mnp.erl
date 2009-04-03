@@ -6,7 +6,7 @@
 
 -module(erms_mnp).
 -include_lib("logging.hrl").
--include_lib("eunit.hrl").
+-include_lib("eunit/include/eunit.hrl").
 
 -define(STAGING_LOOKUP_URL,
         "http://mnps.wapflash.net.nz:8080/mnp/query?service=isTelecomCustomer&MDN=").

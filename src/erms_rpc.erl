@@ -8,7 +8,7 @@
 %%%-------------------------------------------------------------------
 -module(erms_rpc).
 
--include_lib("eunit.hrl").
+-include_lib("eunit/include/eunit.hrl").
 
 %% API
 -export([erms_nodes/0,

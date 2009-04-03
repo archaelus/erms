@@ -8,10 +8,10 @@
 %%%-------------------------------------------------------------------
 -module(erms_connection_sup).
 
--include_lib("eunit.hrl").
+-include_lib("eunit/include/eunit.hrl").
 -include_lib("logging.hrl").
 -include_lib("mnesia_model.hrl").
--include_lib("qlc.hrl").
+-include_lib("stdlib/include/qlc.hrl").
 -include_lib("stdlib/include/ms_transform.hrl").
 
 -behaviour(supervisor).

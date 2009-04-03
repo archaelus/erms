@@ -9,10 +9,10 @@
 -module(erms_reports).
 
 -include_lib("logging.hrl").
--include_lib("eunit.hrl").
+-include_lib("eunit/include/eunit.hrl").
 -include_lib("mnesia_model.hrl").
 -include_lib("stdlib/include/ms_transform.hrl").
--include_lib("mail_mime.hrl").
+-include_lib("esmtp_mime.hrl").
 
 %% API
 -compile(export_all).

@@ -11,7 +11,7 @@
 -behaviour(gen_server).
 
 -include_lib("logging.hrl").
--include_lib("eunit.hrl").
+-include_lib("eunit/include/eunit.hrl").
 -include_lib("oserl.hrl").
 -include_lib("smpp_base.hrl").
 -include_lib("mnesia_model.hrl").

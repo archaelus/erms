@@ -8,7 +8,7 @@
 %%%-------------------------------------------------------------------
 -module(esvc_voucher).
 
--include_lib("eunit.hrl").
+-include_lib("eunit/include/eunit.hrl").
 -include_lib("logging.hrl").
 -include_lib("mnesia_model.hrl").
 -include_lib("esvc_voucher.hrl").

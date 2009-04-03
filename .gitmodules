@@ -1,0 +1,12 @@
+[submodule "lib/oserl"]
+	path = lib/oserl
+	url = git://github.com/archaelus/oserl.git
+[submodule "lib/common_lib"]
+	path = lib/common_lib
+	url = git://github.com/archaelus/common_lib.git
+[submodule "lib/esmtp"]
+	path = lib/esmtp
+	url = git://github.com/archaelus/esmtp.git
+[submodule "lib/yaws"]
+	path = lib/yaws
+	url = git://github.com/klacke/yaws.git

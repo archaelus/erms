@@ -8,7 +8,7 @@
 %% @end
 %%%-------------------------------------------------------------------
 -module(erms_numbers).
--include_lib("eunit.hrl").
+-include_lib("eunit/include/eunit.hrl").
 -include_lib("mnesia_model.hrl").
 
 -import(gregexp, [groups/2]).
