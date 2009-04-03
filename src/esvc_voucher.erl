@@ -28,11 +28,11 @@
 %% @doc Given a string_to_replace, and list of ad campaigns, look for the
 %%      campaign's phone number in the message and if found replace the
 %%      string with the campaign's advert. Campaign record format in
-%%      mnesia_model.hrl 
+%%      mnesia_model.hrl
 %% @end
 process_mt(Msg = #msg{}, Options) when is_list(Options) ->
     process_campaigns(Msg, get_campaigns(Options), Options).
-    
+
 %% @spec process_campaigns(Msg, Campaigns, Options) -> term()
 %%    Msg = #msg{}
 %%    Campaigns = list()
@@ -71,9 +71,9 @@ process_campaign(M=#msg{text=Body}, {#campaign{name=Name, ad=Ad},Trigger}, Optio
     TextToReplace = proplists:get_value(string_to_replace, Options,"Delivered by 018."),
     % If target text not found, just append advert.
     update_stats(Name, Trigger, Options),
-    case regexp:sub(Body, TextToReplace, Ad) of
-    	{ok,NewText,1} -> M#msg{text=NewText};
-    	_ -> M#msg{text=lists:append([Body, " ", Ad])}
+    case re:replace(Body, TextToReplace, Ad) of
+        T when T =:= Body -> M#msg{text=lists:append([Body, " ", Ad])};
+        NewText -> M#msg{text=NewText}
     end.
 
 %% @private
@@ -96,9 +96,9 @@ get_campaigns(_Options) ->
 
 %% @spec has_match(string(), Regex::string()) -> boolean()
 has_match(String, Regex) ->
-    case regexp:first_match(String, Regex) of
-        {match, _, _} -> true;
-        _ -> false
+    case re:run(String, Regex) of
+        {match, _} -> true;
+        nomatch -> false
     end.
 %%====================================================================
 %% Internal functions

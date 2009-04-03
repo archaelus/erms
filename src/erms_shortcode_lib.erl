@@ -81,12 +81,12 @@ process_rule({match, Field, Target, Dest}, S = #pstate{current=Msg}) ->
             continue
     end;
 process_rule({match_re, Field, Regexp, Dest}, S = #pstate{current=Msg}) ->
-    case regexp:first_match(msg_field(Msg, Field), Regexp) of
-        {match, _Start, _Length} when is_list(Dest) ->
+    case re:run(msg_field(Msg, Field), Regexp) of
+        {match, _} when is_list(Dest) ->
             {finish, S, Dest};
-        {match, _Start, _Length} ->
+        {match, _} ->
             {finish, add_target(S, Msg, Dest)};
-        _NoMatch ->
+        nomatch ->
             continue
     end;
 
@@ -158,7 +158,7 @@ valid({match, Field, _Target, Dest}, Connections) ->
     erms_config:vand([erms_msg:valid_field(Field),
                       valid_dest(Dest, Connections)]);
 valid({match_re, Field, Regexp, Dest}, Connections) ->
-    case regexp:parse(Regexp) of
+    case re:compile(Regexp) of
         {ok, _} when is_tuple(Dest) ->
             erms_config:vand([erms_msg:valid_field(Field),
                               valid_dest(Dest, Connections)]);
@@ -206,7 +206,7 @@ valid_dest({connection, C}, Connections) ->
         false -> {error, {"Missing connection", C}};
         _ -> valid
     end;
-valid_dest(D, _) -> 
+valid_dest(D, _) ->
     {error, {"Unrecoginized destination", D}}.
 
 %%====================================================================
@@ -335,7 +335,7 @@ reply_test() ->
                                                 % Reverses the direction of a #msg{} (swap from and to numbers).
 test_filter(Msg, _Args) ->
     Msg#msg{from=Msg#msg.to,
-            to=Msg#msg.from}.    
+            to=Msg#msg.from}.
 
 rule_filter_test() ->
     NS = process_rules(#pstate{ms=#msg_status{},

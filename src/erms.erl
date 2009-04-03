@@ -54,7 +54,7 @@
 %%  Info = list({Status,{Date,Time},Msg})
 %% @doc Returns the unarchived (orig) msgs for the shortcode named Shortcode
 %%  in reverse chronological order.
-%% @end 
+%% @end
 shortcode_msgs(Shortcode) ->
     F = fun () ->
                 lists:reverse(
@@ -205,7 +205,7 @@ reload_code() ->
     {ok, Modules} = application:get_key(erms, modules),
     lists:map(fun (M) -> {M, c:nl(M)} end, Modules).
 
-%% @spec source_of(Module::atom()) -> Source::string() 
+%% @spec source_of(Module::atom()) -> Source::string()
 %% @doc Returns the source code for the module Module from the running
 %% system (will only work for loaded modules).
 %% @end
@@ -214,7 +214,7 @@ source_of(Mod) ->
     {ok,{_,[{abstract_code,{_,AC}}]}} = beam_lib:chunks(Binary,[abstract_code]),
     io_lib:format("~s~n", [erl_prettypr:format(erl_syntax:form_list(AC))]).
 
-%% @spec print_source_of(Module::atom()) -> Source::string() 
+%% @spec print_source_of(Module::atom()) -> Source::string()
 %% @doc Prints to stdout (to your current shell process - will work
 %% from a remote shell) the source code for the module Module from the
 %% running system (will only work for loaded modules).
@@ -232,7 +232,7 @@ validate_dump_config(File) ->
                    is_record(L, login)],
     [{logins,
       [{L#login.type, L#login.username,
-        erms_auth:valid_login(L, 
+        erms_auth:valid_login(L,
                               [S#shortcode.name || S <- Shortcodes],
                               [C#connection.name || C <- Connections])}
        || L <- Logins]},
@@ -257,7 +257,7 @@ nested_foldl(Fn, Acc0, List) ->
 
 wait_result({Pid, Ref}) ->
       receive
-	  {'DOWN', Ref, _, _, normal} -> 
+	  {'DOWN', Ref, _, _, normal} ->
               receive {?MODULE, Pid, Result} -> Result end;
 	  {'DOWN', Ref, _, _, Reason} -> exit(Reason)
       end.
@@ -284,7 +284,7 @@ process_terms(Fn, Terms, Acc) ->
     [Worker|Acc].
 
 msg_re(RE) ->
-    {ok, Re} = regexp:parse(RE),
+    {ok, CompRe} = re:compile(RE),
     fun (#archived_msg{version=2,
                        msg_id=_Id,
                        archive_date=_Date,
@@ -292,9 +292,9 @@ msg_re(RE) ->
                        msgs=Msgs,
                        delivery_details=_DeliveryInfo}, Acc) ->
             This = lists:foldl(fun (#msg{text=T}, MAcc) ->
-                                       case regexp:first_match(T, Re) of
-                                           {match, _, _} -> [T|MAcc];
-                                           _ -> MAcc
+                                       case re:run(T, CompRe) of
+                                           {match, _} -> [T|MAcc];
+                                           nomatch -> MAcc
                                        end
                                end, [], Msgs),
             lists:append(This, Acc);
@@ -302,7 +302,7 @@ msg_re(RE) ->
     end.
 
 msg_re_orig(RE) ->
-    {ok, Re} = regexp:parse(RE),
+    {ok, CompRe} = re:compile(RE),
     fun (#archived_msg{version=2,
                        msg_id=Id,
                        archive_date=_Date,
@@ -310,9 +310,9 @@ msg_re_orig(RE) ->
                        msgs=Msgs,
                        delivery_details=_DeliveryInfo}, Acc) ->
             M = erms_msg:fetch(Id, Msgs),
-            case regexp:first_match(M#msg.text, Re) of
-                {match, _, _} -> [{Id, M#msg.text}|Acc];
-                _ -> Acc
+            case re:run(M#msg.text, CompRe) of
+                {match, _} -> [{Id, M#msg.text}|Acc];
+                nomatch -> Acc
             end
     end.
 
@@ -345,8 +345,8 @@ msg_text() ->
     end.
 
 stats() ->
-    {erms_rpc:multicall(fun () -> 
+    {erms_rpc:multicall(fun () ->
 				{node(), erms_stats:current_stats()}
 			end),
      erms_stats:global_get_counters()}.
-    
+
